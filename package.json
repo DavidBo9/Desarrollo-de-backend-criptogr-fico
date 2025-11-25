@@ -1,0 +1,22 @@
+{
+  "name": "desarrollo-de-backend-criptogr-fico",
+  "version": "1.0.0",
+  "description": "Proyecto para implementar diferentes algoritmos de encriptado asegurando la comprensión del uso práctico y los casos de uso adecuados",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidBo9/Desarrollo-de-backend-criptogr-fico.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidBo9/Desarrollo-de-backend-criptogr-fico/issues"
+  },
+  "homepage": "https://github.com/DavidBo9/Desarrollo-de-backend-criptogr-fico#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
