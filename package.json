@@ -4,6 +4,8 @@
   "description": "Proyecto para implementar diferentes algoritmos de encriptado asegurando la comprensión del uso práctico y los casos de uso adecuados",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +19,9 @@
   },
   "homepage": "https://github.com/DavidBo9/Desarrollo-de-backend-criptogr-fico#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^9.0.0"
   }
 }
