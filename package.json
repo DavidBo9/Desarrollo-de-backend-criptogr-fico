@@ -1,22 +1,29 @@
 {
-  "name": "desarrollo-de-backend-criptogr-fico",
+  "name": "desarrollo-de-backend-criptografico",
   "version": "1.0.0",
   "description": "Proyecto para implementar diferentes algoritmos de encriptado asegurando la comprensión del uso práctico y los casos de uso adecuados",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DavidBo9/Desarrollo-de-backend-criptogr-fico.git"
+    "url": "git+https://github.com/DavidBo9/Desarrollo-de-backend-criptografico.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DavidBo9/Desarrollo-de-backend-criptogr-fico/issues"
+    "url": "https://github.com/DavidBo9/Desarrollo-de-backend-criptografico/issues"
   },
-  "homepage": "https://github.com/DavidBo9/Desarrollo-de-backend-criptogr-fico#readme",
+  "homepage": "https://github.com/DavidBo9/Desarrollo-de-backend-criptografico#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "argon2": "^0.44.0",
+    "express": "^5.1.0",
+    "mongoose": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

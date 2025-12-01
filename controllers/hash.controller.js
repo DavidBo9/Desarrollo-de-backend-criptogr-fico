@@ -1,4 +1,4 @@
-// controllers/hash.controller.js
+
 
 const CryptoService = require("../services/cryptoService");
 
