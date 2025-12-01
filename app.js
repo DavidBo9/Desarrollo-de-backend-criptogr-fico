@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
             funciones_hash: {
                 sha256: 'POST /api/hash/sha256',
                 argon2: 'POST /api/hash/argon2',
-                verify_argon2: 'POST /api/hash/verify/argon2'
+                verify_argon2: 'POST /api/hash/verify'
             },
             cifrado_simetrico: {
                 aes: {
@@ -82,8 +82,7 @@ app.get('/', (req, res) => {
 const userRoute = require('./routes/user.route');
 const symmetricRoute = require('./routes/symmetric.route');
 const asymmetricRoute = require('./routes/asymmetric.route');
-// TODO: Agregar rutas para hash cuando estén listas
-// const hashRoute = require('./routes/hash.route');
+const hashRoute = require('./routes/hash.route');
 
 // ===========================================
 // SECCIÓN DE RUTAS CORREGIDA (MONTAJE ÚNICO)
@@ -98,9 +97,7 @@ app.use('/api/users', userRoute);
 
 app.use('/api', symmetricRoute); 
 app.use('/api', asymmetricRoute);
-
-// TODO: Agregar cuando esté listo
-// app.use('/api/hash', hashRoute);
+app.use('/api/hash', hashRoute);
 
 // ===========================================
 // FIN DE LA SECCIÓN DE RUTAS CORREGIDA
@@ -156,7 +153,7 @@ mongoose.connect(MONGODB_URI) // <-- Opciones obsoletas eliminadas
         console.log('\n🔐 Módulos de cifrado cargados:');
         console.log('   ✓ Cifrado Simétrico (AES-256, ChaCha20)');
         console.log('   ✓ Cifrado Asimétrico (RSA, DSA, ECDSA)');
-        console.log('   ⏳ Funciones Hash (Pendiente)');
+        console.log('   ✓ Funciones Hash (SHA-256, Argon2)');
     });
 })
 .catch(err => {
