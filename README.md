@@ -32,7 +32,7 @@ Asegúrate de configurar el **Content-Type** como `application/json` en Postman.
 
 | Endpoints | Método | URL (Sufijo) | Body (JSON) |
 | :--- | :--- | :--- | :--- |
-| **SHA-256** | `POST` | `/hash/sha256` | `{"data": "El mensaje secreto"}` |
+| **SHA-256** | `POST` | `/hash/sha256` | `{"text": "El mensaje secreto"}` |
 | **Argon2 (Hash)** | `POST` | `/hash/argon2` | `{"password": "passwordSeguro123"}` |
 | **Argon2 (Verify)** | `POST` | `/hash/verify/argon2` | `{"password": "passwordSeguro123", "hash": "<HASH_RECIBIDO_DE_LA_PETICIÓN_ANTERIOR>"}` |
 
@@ -46,24 +46,15 @@ Asegúrate de configurar el **Content-Type** como `application/json` en Postman.
 
 | Endpoints | Método | URL (Sufijo) | Body (JSON) |
 | :--- | :--- | :--- | :--- |
-| **Generar Llave** | `GET` | `/generate-key` | **(No Body requerido)** |
-| **Cifrar** | `POST` | `/encrypt/aes_cbc` | `{"text": "Mensaje Secreto", "key": "<LLAVE_BASE64>", "iv": "<IV_BASE64>"}` |
-| **Descifrar** | `POST` | `/decrypt/aes_cbc` | `{"encryptedData": "<DATA_BASE64>", "key": "<LLAVE_BASE64>", "iv": "<IV_BASE64>"}` |
+| **Cifrar** | `POST` | `/encrypt/aes_cbc` | `{"text": "Mensaje Secreto"}` |
+| **Descifrar** | `POST` | `/decrypt/aes_cbc` | `{"ciphertext": "<DATA_BASE64>", "key": "<LLAVE_BASE64>", "iv": "<IV_BASE64>"}` |
 
 #### ChaCha20-Poly1305
 
 | Endpoints | Método | URL (Sufijo) | Body (JSON) |
 | :--- | :--- | :--- | :--- |
-| **Cifrar** | `POST` | `/encrypt/chacha20` | `{"text": "Mensaje Secreto", "key": "<LLAVE_BASE64>"}` |
-| **Descifrar** | `POST` | `/decrypt/chacha20` | `{"encryptedData": "<DATA_BASE64>", "key": "<LLAVE_BASE64>", "nonce": "<NONCE_BASE64>", "authTag": "<TAG_BASE64>"}` |
-
-#### Diffie-Hellman (Intercambio de Llaves)
-
-| Endpoints | Método | URL (Sufijo) | Body (JSON) |
-| :--- | :--- | :--- | :--- |
-| **Iniciar** | `POST` | `/encrypt/diffie-hellman/init` | `{"sessionId": "session-123-A"}` |
-| **Completar** | `POST` | `/encrypt/diffie-hellman/complete` | `{"sessionId": "session-123-A", "otherPublicKey": "<LLAVE_PÚBLICA_DE_B>"}` |
-
+| **Cifrar** | `POST` | `/encrypt/chacha20` | `{"text": "Mensaje Secreto"}` |
+| **Descifrar** | `POST` | `/decrypt/chacha20` | `{"cipherText": "<DATA_BASE64>", "key": "<LLAVE_BASE64>", "nonce": "<NONCE_BASE64>", "authTag": "<TAG_BASE64>"}` |
 ---
 
 ### 4. 🔒 Cifrado Asimétrico (Asymmetric Crypto)
@@ -86,24 +77,25 @@ desarrollo-de-backend-criptografico/
 │
 ├── 📁 controllers/
 │   ├── user.controller.js          # CRUD de usuarios
+│   ├── hash.controller.js          # Controlador funciones hash
 │   ├── symmetric.controller.js     # Controlador cifrado simétrico
 │   └── asymmetric.controller.js    # Controlador cifrado asimétrico
+
 │   
 ├── 📁 models/
 │   └── user.model.js               # Modelo de usuario MongoDB
 │
 ├── 📁 routes/
 │   ├── user.route.js               # Rutas de usuarios
+│   ├── hash.route.js               # Rutas funciones hash
 │   ├── symmetric.route.js          # Rutas cifrado simétrico
 │   └── asymmetric.route.js         # Rutas cifrado asimétrico
 │
 ├── 📁 services/
-│   ├── cryptoService.js            # Lógica AES, ChaCha20, Diffie-Hellman
+│   ├── hashService.js              # Lógica SHA-256, Argon2
+│   ├── symmetricService.js         # Lógica AES, ChaCha20
 │   └── asymmetricService.js        # Lógica RSA, DSA, ECDSA
 │
-├── 📁 test/
-│   ├── symmetric.examples.js       # Ejemplos cifrado simétrico
-│   └── asymmetric.examples.js      # Ejemplos cifrado asimétrico
 │
 ├── app.js                          # Aplicación principal Express
 ├── .env.example                    # Variables de entorno ejemplo
@@ -226,41 +218,6 @@ http://localhost:3000
 | **Asimétrico** | POST | `/api/sign/dsa` | Firmar con DSA/ECDSA |
 | **Asimétrico** | POST | `/api/verify/dsa` | Verificar firma |
 
-## 🧪 Pruebas
-
-### Ejecutar ejemplos
-```bash
-# Probar cifrado simétrico
-node test/symmetric.examples.js
-
-# Probar cifrado asimétrico  
-node test/asymmetric.examples.js
-```
-
-### Usando Postman o Thunder Client
-
-1. Importar la colección desde `postman_collection.json` (si existe)
-2. O crear requests manualmente con los ejemplos en `/test`
-
-### Ejemplo con cURL
-
-```bash
-# Generar llave simétrica
-curl http://localhost:3000/api/encrypt/generate-key
-
-# Generar llaves RSA
-curl -X POST http://localhost:3000/api/generate/rsa \
-  -H "Content-Type: application/json" \
-  -d '{"keySize": 2048}'
-
-# Cifrar con AES
-curl -X POST http://localhost:3000/api/encrypt/aes_cbc \
-  -H "Content-Type: application/json" \
-  -d '{
-    "text": "Mensaje secreto",
-    "key": "base64KeyHere..."
-  }'
-```
 
 ## 🔧 Variables de Entorno
 
