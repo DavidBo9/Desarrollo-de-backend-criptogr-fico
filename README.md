@@ -1,5 +1,11 @@
 # 🔐 Desarrollo de Backend Criptográfico
 
+## 🤝 Equipo de Desarrollo
+
+- **Emanuel Juárez Moreno** - Funciones Hash (SHA-256, Argon2)
+- **Mario Eduardo Gómez Cruz** - Cifrado Simétrico (AES, ChaCha20) 
+- **David Bojalil Abiti** - Cifrado Asimétrico (RSA, DSA, ECDSA)
+
 ## Descripción del Proyecto
 
 Proyecto para implementar diferentes algoritmos de encriptado asegurando la comprensión del uso práctico y los casos de uso adecuados.
@@ -712,11 +718,9 @@ const corsOptions = {
 };
 ```
 
-## 🤝 Equipo de Desarrollo
+## 🔍 Explicación y conclusiones
 
-- **Emanuel** - Funciones Hash (SHA-256, Argon2)
-- **Stock** - Cifrado Simétrico (AES, ChaCha20) 
-- **David** - Cifrado Asimétrico (RSA, DSA, ECDSA) 
+Para el hashing de integridad se utiliza SHA-256, ya que es un algoritmo rápido y seguro para detectar modificaciones de datos; sin embargo, no es adecuado para almacenar contraseñas porque su velocidad permite ataques de fuerza bruta con GPU y hardware especializado. Por ello, para el manejo seguro de contraseñas se emplea Argon2, ganador del Password Hashing Competition, el cual es lento por diseño, configurable y resistente a ataques paralelos gracias a su alto consumo de memoria. En cuanto al cifrado simétrico, se prefiere AES sobre DES debido a que DES cuenta con una clave muy corta de 56 bits y hoy es completamente vulnerable a fuerza bruta, mientras que AES ofrece claves de 128, 192 y 256 bits, alto rendimiento y una seguridad ampliamente reconocida en la industria. En conjunto, estos algoritmos permiten construir un backend robusto, moderno y alineado a las mejores prácticas criptográficas actuales.
 
 ## 📝 Licencia
 
